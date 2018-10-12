@@ -1,0 +1,10 @@
+1. tasks which are to be done
+2. which are being done
+3. which are already done
+4. tasks should be assigned to a person(contact)
+5. the pic should be shown of that contact
+
+assign task to emp
+display all tasks with emps assigned to them
+user can select a task and then change its status (todo/doing/done)
+select employee name and display his/her tasks in a split screen format (todo/doing/done)
