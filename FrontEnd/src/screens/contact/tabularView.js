@@ -45,7 +45,6 @@ class ContactsTabularView extends Component {
   render() {
     const { users } = this.props;
     const usersTableData = this.renderUsersTableData(users);
-    console.log('usersTableData', usersTableData);
     return (
       <div>
         <CheckBoxTable

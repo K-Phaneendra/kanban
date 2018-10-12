@@ -3,11 +3,19 @@ import { connect } from 'react-redux';
 import CreateTask from './createTask';
 import Select from '../../components/TextField/Select';
 import Primary from '../../components/Buttons/Primary';
+import { assignTask } from '../../actions/kanbanToolActions';
+import ContactsTabularView from '../contact/tabularView';
+import ResponsiveDialog from '../../components/Model/ResponsiveDialog';
+import EditTaskStatus from './editTaskStatus';
 
 class AssignTask extends Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      disableSubmit: true,
+      editForm: false,
+      openEdit: false
+    };
   }
 
   getDD = json => {
@@ -31,13 +39,41 @@ class AssignTask extends Component {
   };
 
   submit = () => {
-    alert('assign task to emp with status as TODO');
+    const taskObj = {
+      task: this.state.task,
+      status: 'TO DO'
+    };
+    this.props.dispatch(assignTask(this.state.contact, taskObj));
+  };
+
+  selectedRowToEdit = row => {
+    const objectId = '_id';
+    console.log('selected Row', row);
+    if (row[objectId]) {
+      this.setState({
+        selectedRow: row,
+        editForm: true
+      });
+    } else {
+      this.setState({
+        selectedRow: row,
+        editForm: false
+      });
+    }
   };
 
   render() {
     const { users, tasks } = this.props;
     const usersDD = this.getDD(users);
     const tasksDD = this.getDD(tasks);
+
+    let { disableSubmit } = this.state;
+    if (this.state.contact && this.state.task) {
+      disableSubmit = false;
+    } else {
+      disableSubmit = true;
+    }
+    console.log('disableSubmit', disableSubmit);
     return (
       <div>
         <div>
@@ -59,10 +95,50 @@ class AssignTask extends Component {
               name="task"
               value={this.state.task}
             />
-            <Primary value="Assign Task" onClick={this.submit} />
+            <Primary
+              value="Assign Task"
+              disabled={disableSubmit}
+              onClick={this.submit}
+            />
           </form>
         </div>
-        <div>table to display all tasks with contact names</div>
+        <div>
+          <div>
+            <ul
+              style={{
+                listStyleType: 'none',
+                margin: '0',
+                padding: '0',
+                width: '60px'
+              }}
+            >
+              {this.state.editForm ? (
+                <li>
+                  <i
+                    className="far fa-edit"
+                    title="Edit Tasks"
+                    onClick={() => this.setState({ openEdit: true })}
+                  />
+                  <ResponsiveDialog
+                    heading="Tasks Overview"
+                    open={this.state.openEdit}
+                    onClose={() => this.setState({ openEdit: false })}
+                  >
+                    <EditTaskStatus selectedRow={this.state.selectedRow} />
+                  </ResponsiveDialog>
+                </li>
+              ) : (
+                ''
+              )}
+            </ul>
+          </div>
+          <div>
+            <ContactsTabularView
+              users={users}
+              selectedRowToEdit={this.selectedRowToEdit}
+            />
+          </div>
+        </div>
       </div>
     );
   }

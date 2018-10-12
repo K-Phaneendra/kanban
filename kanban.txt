@@ -11,7 +11,7 @@ select employee name and display his/her tasks in a split screen format (todo/do
 
 in create user tab: display created users in a table so user can edit users
 ======
-api on assign task to emp - status of the task will be todo
+api on assign task to emp - status of the task will be todo - done
 display table with emp img & name
 on selecting an emp from table - we need a view button to see
 todo|doing|done
