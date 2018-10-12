@@ -123,8 +123,9 @@ class AssignTask extends Component {
                     heading="Tasks Overview"
                     open={this.state.openEdit}
                     onClose={() => this.setState({ openEdit: false })}
+                    onSubmit={() => this.setState({ submitClicked: true })}
                   >
-                    <EditTaskStatus selectedRow={this.state.selectedRow} />
+                    <EditTaskStatus selectedRow={this.state.selectedRow} submitClicked={this.state.submitClicked} />
                   </ResponsiveDialog>
                 </li>
               ) : (

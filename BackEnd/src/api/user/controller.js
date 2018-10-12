@@ -63,3 +63,26 @@ export const asigntask = (req, res, next) => {
     }
   )
 }
+
+export const updateassignedtasks = (req, res, next) => {
+  User.findOneAndUpdate(
+    { _id: req.params.id },
+    {
+      $set: { tasks: req.body }
+    },
+    (err, result) => {
+      if (!err) {
+        User.find({})
+          .populate('tasks.task')
+          .exec()
+          .then(populatedRes =>
+            res.send({
+              error: false,
+              data: populatedRes,
+              message: 'Successfully Updated Tasks'
+            })
+          )
+      }
+    }
+  )
+}

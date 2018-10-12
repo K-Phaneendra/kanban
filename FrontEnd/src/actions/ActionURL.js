@@ -4,7 +4,8 @@ export const UserUrl = {
   CREATE_USER: `${API_BASE_URL}users/createuser`,
   UPDATE_USER: `${API_BASE_URL}users/updateuser`,
   FETCH_USERS: `${API_BASE_URL}users/fetchusers`,
-  ASSIGN_TASK: `${API_BASE_URL}users/asigntask`
+  ASSIGN_TASK: `${API_BASE_URL}users/asigntask`,
+  UPDATE_ASSIGNED_TASKS: `${API_BASE_URL}users/updateassignedtasks`
 };
 
 export const TaskUrl = {

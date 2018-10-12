@@ -31,7 +31,7 @@ class ResponsiveDialog extends React.Component {
 
               Cancel
             </Button>
-            <Button onClick={this.props.onClose} color="primary" autoFocus>
+            <Button onClick={this.props.onSubmit} color="primary" autoFocus>
 
               Submit
             </Button>

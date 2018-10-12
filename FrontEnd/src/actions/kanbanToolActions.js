@@ -114,3 +114,21 @@ export const assignTask = (id, data) => {
     }
   };
 };
+
+export const updateAssignedTasks = (id, data) => {
+  const url = `${UserUrl.UPDATE_ASSIGNED_TASKS}/${id}`;
+  return async dispatch => {
+    try {
+      const result = await API_POST(url, data);
+      if (!result.error) {
+        dispatch({
+          type: UserType.FETCH_USERS,
+          payload: result.data,
+          snackBarData: { open: true, msg: result.message }
+        });
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+};

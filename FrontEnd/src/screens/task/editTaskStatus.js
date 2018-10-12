@@ -1,83 +1,195 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { cloneDeep, pullAllWith, isEqual } from 'lodash';
+import { updateAssignedTasks } from '../../actions/kanbanToolActions';
 
-const getTasksByStatus = (selectedRow, statusName) => {
-  const generatedArray = [];
-  selectedRow.tasks.map(tsk => {
-    if (tsk.status === statusName) {
-      generatedArray.push(tsk);
+const objectId = '_id';
+
+export default connect()(
+  class EditTaskStatus extends Component {
+    constructor() {
+      super();
+      this.state = {};
     }
-    return null;
-  });
-  return generatedArray;
-};
 
-const changeStatus = e => {
-  console.log('e', e);
-};
+    componentWillMount() {
+      const todoData = this.getTasksByStatus(this.props.selectedRow, 'TO DO');
+      const doingData = this.getTasksByStatus(this.props.selectedRow, 'DOING');
+      const doneData = this.getTasksByStatus(this.props.selectedRow, 'DONE');
+      this.setState({ todoData, doingData, doneData });
+    }
 
-export default props => {
-  const todoData = getTasksByStatus(props.selectedRow, 'TO DO');
-  const doingData = getTasksByStatus(props.selectedRow, 'DOING');
-  const doneData = getTasksByStatus(props.selectedRow, 'DONE');
+    componentWillReceiveProps(nextProps) {
+      if (nextProps.submitClicked) {
+        const tasks = [];
+        this.state.todoData.map(todo => {
+          tasks.push(todo);
+          return null;
+        });
+        this.state.doingData.map(doing => {
+          tasks.push(doing);
+          return null;
+        });
+        this.state.doneData.map(done => {
+          tasks.push(done);
+          return null;
+        });
+        this.props.dispatch(
+          updateAssignedTasks(nextProps.selectedRow[objectId], tasks)
+        );
+      }
+    }
 
-  console.log('lll', todoData, doingData, doneData);
+    getTasksByStatus = (selectedRow, statusName) => {
+      const generatedArray = [];
+      selectedRow.tasks.map(tsk => {
+        if (tsk.status === statusName) {
+          generatedArray.push(tsk);
+        }
+        return null;
+      });
+      return generatedArray;
+    };
 
-  return (
-    <div>
-      <div style={{ float: 'left' }}>
-        {/* eslint-disable-next-line */}
-        <label>TO DO</label>
-        <ol>
-          {todoData.map(val => (
-            <li>
-              {val.task.name}
+    todo = val => {
+      const { todoData, doingData, doneData } = this.state;
+      const doingDataClone = pullAllWith(doingData, [val], isEqual);
+      const todoClone = cloneDeep(todoData);
+      const doneClone = pullAllWith(doneData, [val], isEqual);
 
-              &nbsp;
-              <input
-                type="button"
-                value="Change Status"
-                onClick={e => changeStatus(e)}
-              />
-            </li>
-          ))}
-        </ol>
-      </div>
-      <div style={{ float: 'left' }}>
-        {/* eslint-disable-next-line */}
-        <label>DOING</label>
-        <ol>
-          {doingData.map(val => (
-            <li>
-              {val.task.name}
+      const generatedObj = {
+        task: val.task,
+        status: 'TO DO',
+        _id: val[objectId]
+      };
+      todoClone.push(generatedObj);
 
-              &nbsp;
-              <input
-                type="button"
-                value="Change Status"
-                onClick={e => changeStatus(e)}
-              />
-            </li>
-          ))}
-        </ol>
-      </div>
-      <div style={{ float: 'left' }}>
-        {/* eslint-disable-next-line */}
-        <label>DONE</label>
-        <ol>
-          {doneData.map(val => (
-            <li>
-              {val.task.name}
+      this.setState({
+        todoData: todoClone,
+        doingData: doingDataClone,
+        doneData: doneClone
+      });
+    };
 
-              &nbsp;
-              <input
-                type="button"
-                value="Change Status"
-                onClick={e => changeStatus(e)}
-              />
-            </li>
-          ))}
-        </ol>
-      </div>
-    </div>
-  );
-};
+    doing = val => {
+      const { todoData, doingData, doneData } = this.state;
+      const doingDataClone = cloneDeep(doingData);
+      const todoClone = pullAllWith(todoData, [val], isEqual);
+      const doneClone = pullAllWith(doneData, [val], isEqual);
+
+      const generatedObj = {
+        task: val.task,
+        status: 'DOING',
+        _id: val[objectId]
+      };
+      doingDataClone.push(generatedObj);
+
+      this.setState({
+        todoData: todoClone,
+        doingData: doingDataClone,
+        doneData: doneClone
+      });
+    };
+
+    done = val => {
+      const { todoData, doingData, doneData } = this.state;
+      const doingDataClone = pullAllWith(doingData, [val], isEqual);
+      const todoClone = pullAllWith(todoData, [val], isEqual);
+      const doneClone = cloneDeep(doneData);
+
+      const generatedObj = {
+        task: val.task,
+        status: 'DONE',
+        _id: val[objectId]
+      };
+      doneClone.push(generatedObj);
+
+      this.setState({
+        todoData: todoClone,
+        doingData: doingDataClone,
+        doneData: doneClone
+      });
+    };
+
+    render() {
+      const { todoData, doingData, doneData } = this.state;
+
+      return (
+        <div>
+          <div style={{ float: 'left' }}>
+            {/* eslint-disable-next-line */}
+            <label>TO DO</label>
+            <ol>
+              {todoData.map(val => (
+                <li>
+                  {val.task.name}
+                  <br />
+                  <input
+                    type="button"
+                    value="DOING"
+                    onClick={() => this.doing(val)}
+                  />
+
+                  &nbsp;
+                  <input
+                    type="button"
+                    value="DONE"
+                    onClick={() => this.done(val)}
+                  />
+                </li>
+              ))}
+            </ol>
+          </div>
+          <div style={{ float: 'left' }}>
+            {/* eslint-disable-next-line */}
+            <label>DOING</label>
+            <ol>
+              {doingData.map(val => (
+                <li>
+                  {val.task.name}
+                  <br />
+                  <input
+                    type="button"
+                    value="TO DO"
+                    onClick={() => this.todo(val)}
+                  />
+
+                  &nbsp;
+                  <input
+                    type="button"
+                    value="DONE"
+                    onClick={() => this.done(val)}
+                  />
+                </li>
+              ))}
+            </ol>
+          </div>
+          <div style={{ float: 'left' }}>
+            {/* eslint-disable-next-line */}
+            <label>DONE</label>
+            <ol>
+              {doneData.map(val => (
+                <li>
+                  {val.task.name}
+                  <br />
+                  <input
+                    type="button"
+                    value="TO DO"
+                    onClick={() => this.todo(val)}
+                  />
+
+                  &nbsp;
+                  <input
+                    type="button"
+                    value="DOING"
+                    onClick={() => this.doing(val)}
+                  />
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
+      );
+    }
+  }
+);
