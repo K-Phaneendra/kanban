@@ -79,3 +79,20 @@ export const fetchUsers = () => {
     }
   };
 };
+
+export const fetchTasks = () => {
+  const url = `${TaskUrl.FETCH_TASKS}`;
+  return async dispatch => {
+    try {
+      const result = await API_GET(url);
+      if (!result.error) {
+        dispatch({
+          type: TaskType.FETCH_TASKS,
+          payload: result.data
+        });
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+};

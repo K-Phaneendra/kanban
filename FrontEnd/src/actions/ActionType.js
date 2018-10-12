@@ -4,5 +4,6 @@ export const UserType = {
 };
 
 export const TaskType = {
-  CREATE_TASK: 'CREATE_TASK'
+  CREATE_TASK: 'CREATE_TASK',
+  FETCH_TASKS: 'FETCH_TASKS'
 };

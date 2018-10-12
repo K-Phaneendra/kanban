@@ -7,5 +7,6 @@ export const UserUrl = {
 };
 
 export const TaskUrl = {
-  CREATE_TASK: `${API_BASE_URL}tasks/createtask`
+  CREATE_TASK: `${API_BASE_URL}tasks/createtask`,
+  FETCH_TASKS: `${API_BASE_URL}tasks/fetchtasks`
 };

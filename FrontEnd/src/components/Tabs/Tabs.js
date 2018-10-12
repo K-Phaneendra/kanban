@@ -48,7 +48,7 @@ class ScrollableTabsButtonPrevent extends React.Component {
     const { classes } = this.props;
     const { value } = this.state;
 
-    const { users } = this.props;
+    const { users, tasks } = this.props;
 
     return (
       <div className={classes.root}>
@@ -75,7 +75,7 @@ class ScrollableTabsButtonPrevent extends React.Component {
         )}
         {value === 1 && (
           <TabContainer>
-            <AssignTask />
+            <AssignTask users={users} tasks={tasks} />
           </TabContainer>
         )}
         {value === 2 && <TabContainer>Item Three</TabContainer>}

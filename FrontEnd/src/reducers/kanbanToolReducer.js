@@ -52,6 +52,11 @@ export default function reducer(state = initialState, action) {
       break;
     }
 
+    case TaskType.FETCH_TASKS: {
+      st = { ...state, tasks: action.payload };
+      break;
+    }
+
     default: {
       return st;
     }

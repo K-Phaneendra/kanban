@@ -23,50 +23,17 @@ const styles = theme => ({
   }
 });
 
-const currencies = [
-  {
-    value: 'USD',
-    label: '$'
-  },
-  {
-    value: 'EUR',
-    label: '€'
-  },
-  {
-    value: 'BTC',
-    label: '฿'
-  },
-  {
-    value: 'JPY',
-    label: '¥'
-  }
-];
-
 class TextFields extends React.Component {
-  state = {
-    name: 'Cat in the Hat',
-    age: '',
-    multiline: 'Controlled',
-    currency: 'EUR'
-  };
-
-  handleChange = name => event => {
-    this.setState({
-      [name]: event.target.value
-    });
-  };
-
   render() {
     const { classes } = this.props;
-
     return (
       <TextField
         id="standard-select-currency"
         select
         label={this.props.label}
         className={classes.textField}
-        value={this.state.currency}
-        onChange={this.handleChange('currency')}
+        value={this.props.value}
+        onChange={e => this.props.selectedDD(e)}
         SelectProps={{
           MenuProps: {
             className: classes.menu
@@ -74,8 +41,9 @@ class TextFields extends React.Component {
         }}
         // helperText="Please select your currency"
         margin="normal"
+        name={this.props.name}
       >
-        {currencies.map(option => (
+        {this.props.ddData.map(option => (
           <MenuItem key={option.value} value={option.value}>
             {option.label}
           </MenuItem>

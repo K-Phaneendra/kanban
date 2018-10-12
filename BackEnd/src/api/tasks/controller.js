@@ -1,13 +1,12 @@
 import { success, notFound } from '../../services/response/'
 import Task from './model'
 
-export const fetchusers = (req, res, next) => {
-  User.find({}, (err, result) => {
+export const fetchtasks = (req, res, next) => {
+  Task.find({}, (err, result) => {
     if (!err) {
-      res.send({ error: false, data: result.map(r => r.view()) })
+      res.send({ error: false, data: result })
     }
   })
-  // findUsersandSend(req, res, next)
 }
 
 export const createtask = (req, res, next) => {
