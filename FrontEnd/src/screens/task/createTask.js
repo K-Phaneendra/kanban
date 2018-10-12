@@ -30,7 +30,7 @@ class CreateTask extends Component {
     return (
       <div>
         <form>
-          <TextField placeholder="Task Name" onBlur={this.captureName} />
+          <TextField placeholder="Task Name" onChange={this.captureName} />
 
           <Primary
             value="Create Task"

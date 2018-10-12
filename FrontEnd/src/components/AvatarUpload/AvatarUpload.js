@@ -2,7 +2,7 @@ import React from 'react';
 import Avatar from 'react-avatar-edit';
 
 export default props => (
-  <div style={{ width: '73vh', height: '27vh' }}>
+  <div style={{ width: '73vh', height: '27vh', margin: '1em auto' }}>
     <div style={{ float: 'left', marginRight: '10vh', marginLeft: '8vh' }}>
       <Avatar
         width={200}

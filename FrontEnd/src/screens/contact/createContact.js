@@ -18,7 +18,6 @@ class CreateContact extends Component {
 
   selectedRowToEdit = row => {
     const objectId = '_id';
-    console.log('selected Row', row);
     if (row[objectId]) {
       this.setState({
         selectedUserId: row[objectId],
@@ -67,7 +66,6 @@ class CreateContact extends Component {
   render() {
     const { preview, disabled, editForm } = this.state;
     const { users } = this.props;
-    console.log('users', users);
     return (
       <div>
         <form>
@@ -100,7 +98,7 @@ class CreateContact extends Component {
             />
           )}
         </form>
-        <div>
+        <div style={{ margin: '1em auto' }}>
           <ContactsTabularView
             users={users}
             selectedRowToEdit={this.selectedRowToEdit}

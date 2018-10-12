@@ -125,7 +125,10 @@ class AssignTask extends Component {
                     onClose={() => this.setState({ openEdit: false })}
                     onSubmit={() => this.setState({ submitClicked: true })}
                   >
-                    <EditTaskStatus selectedRow={this.state.selectedRow} submitClicked={this.state.submitClicked} />
+                    <EditTaskStatus
+                      selectedRow={this.state.selectedRow}
+                      submitClicked={this.state.submitClicked}
+                    />
                   </ResponsiveDialog>
                 </li>
               ) : (
@@ -133,7 +136,7 @@ class AssignTask extends Component {
               )}
             </ul>
           </div>
-          <div>
+          <div style={{ margin: '1em auto' }}>
             <ContactsTabularView
               users={users}
               selectedRowToEdit={this.selectedRowToEdit}
