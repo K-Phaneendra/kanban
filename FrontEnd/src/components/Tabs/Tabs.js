@@ -7,13 +7,14 @@ import Tab from '@material-ui/core/Tab';
 import Contacts from '@material-ui/icons/Contacts';
 import List from '@material-ui/icons/List';
 // import PersonPinIcon from '@material-ui/icons/PersonPin';
-// import HelpIcon from '@material-ui/icons/Help';
+import HelpIcon from '@material-ui/icons/Help';
 // import ShoppingBasket from '@material-ui/icons/ShoppingBasket';
 // import ThumbDown from '@material-ui/icons/ThumbDown';
 // import ThumbUp from '@material-ui/icons/ThumbUp';
 import Typography from '@material-ui/core/Typography';
 import CreateContact from '../../screens/contact/createContact';
 import AssignTask from '../../screens/task/assignTask';
+import HelpDocs from '../../screens/HelpDocs/helpDocs';
 
 function TabContainer(props) {
   return (
@@ -59,6 +60,7 @@ class ScrollableTabsButtonPrevent extends React.Component {
             scrollable
             scrollButtons="off"
           >
+            <Tab icon={<HelpIcon />} />
             <Tab icon={<Contacts />} />
             <Tab icon={<List />} />
             {/* <Tab icon={<PersonPinIcon />} />
@@ -70,10 +72,15 @@ class ScrollableTabsButtonPrevent extends React.Component {
         </AppBar>
         {value === 0 && (
           <TabContainer>
-            <CreateContact users={users} />
+            <HelpDocs />
           </TabContainer>
         )}
         {value === 1 && (
+          <TabContainer>
+            <CreateContact users={users} />
+          </TabContainer>
+        )}
+        {value === 2 && (
           <TabContainer>
             <AssignTask users={users} tasks={tasks} />
           </TabContainer>
