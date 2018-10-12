@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import CreateTask from './createTask';
 import Select from '../../components/TextField/Select';
 import Primary from '../../components/Buttons/Primary';
 
 class AssignTask extends Component {
   render() {
+    console.log('users', this.props);
     return (
       <div>
         <div>
@@ -23,4 +25,4 @@ class AssignTask extends Component {
   }
 }
 
-export default AssignTask;
+export default connect()(AssignTask);

@@ -3,7 +3,16 @@ import mongoose, { Schema } from 'mongoose'
 const userSchema = new Schema(
   {
     name: { type: String },
-    image: { type: String }
+    image: { type: String },
+    tasks: [
+      {
+        task: {
+          type: Schema.Types.ObjectId,
+          ref: 'Task'
+        },
+        status: String
+      }
+    ]
   },
   {
     timestamps: true

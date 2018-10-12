@@ -1,3 +1,4 @@
+import { cloneDeep } from 'lodash';
 import { UserType, TaskType } from '../actions/ActionType';
 
 const initialState = {
@@ -10,9 +11,12 @@ export default function reducer(state = initialState, action) {
   let st = state;
   switch (action.type) {
     case UserType.CREATE_USER: {
+      const { users } = st;
+      const usersClone = cloneDeep(users);
+      usersClone.push(action.payload);
       st = {
         ...state,
-        users: action.payload,
+        users: usersClone,
         snackBarData: action.snackBarData
       };
       break;
@@ -29,6 +33,22 @@ export default function reducer(state = initialState, action) {
         tasks: action.payload,
         snackBarData: action.snackBarData
       };
+      break;
+    }
+
+    case UserType.FETCH_USERS: {
+      if (action.snackBarData) {
+        st = {
+          ...state,
+          users: action.payload,
+          snackBarData: action.snackBarData
+        };
+      } else {
+        st = {
+          ...state,
+          users: action.payload
+        };
+      }
       break;
     }
 

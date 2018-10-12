@@ -6,11 +6,11 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Contacts from '@material-ui/icons/Contacts';
 import List from '@material-ui/icons/List';
-import PersonPinIcon from '@material-ui/icons/PersonPin';
-import HelpIcon from '@material-ui/icons/Help';
-import ShoppingBasket from '@material-ui/icons/ShoppingBasket';
-import ThumbDown from '@material-ui/icons/ThumbDown';
-import ThumbUp from '@material-ui/icons/ThumbUp';
+// import PersonPinIcon from '@material-ui/icons/PersonPin';
+// import HelpIcon from '@material-ui/icons/Help';
+// import ShoppingBasket from '@material-ui/icons/ShoppingBasket';
+// import ThumbDown from '@material-ui/icons/ThumbDown';
+// import ThumbUp from '@material-ui/icons/ThumbUp';
 import Typography from '@material-ui/core/Typography';
 import CreateContact from '../../screens/contact/createContact';
 import AssignTask from '../../screens/task/assignTask';
@@ -48,6 +48,8 @@ class ScrollableTabsButtonPrevent extends React.Component {
     const { classes } = this.props;
     const { value } = this.state;
 
+    const { users } = this.props;
+
     return (
       <div className={classes.root}>
         <AppBar position="static">
@@ -68,7 +70,7 @@ class ScrollableTabsButtonPrevent extends React.Component {
         </AppBar>
         {value === 0 && (
           <TabContainer>
-            <CreateContact />
+            <CreateContact users={users} />
           </TabContainer>
         )}
         {value === 1 && (

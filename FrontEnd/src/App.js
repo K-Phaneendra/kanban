@@ -4,11 +4,15 @@ import logo from './logo.svg';
 import './App.css';
 import Tabs from './components/Tabs/Tabs';
 import SnackBar from './components/SnackBar/SnackBar';
-import { handleSnackBar } from './actions/kanbanToolActions';
+import { handleSnackBar, fetchUsers } from './actions/kanbanToolActions';
 
 class App extends Component {
+  componentDidMount() {
+    this.props.dispatch(fetchUsers());
+  }
+
   render() {
-    const { snackBarData } = this.props;
+    const { snackBarData, users } = this.props;
     return (
       <div className="App">
         <header className="App-header">
@@ -19,7 +23,7 @@ class App extends Component {
           </div>
         </header>
         <div>
-          <Tabs />
+          <Tabs users={users} />
         </div>
         <SnackBar
           open={snackBarData.open}
@@ -34,7 +38,8 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
-  snackBarData: state.kanbanToolReducer.snackBarData
+  snackBarData: state.kanbanToolReducer.snackBarData,
+  users: state.kanbanToolReducer.users
 });
 
 export default connect(mapStateToProps)(App);
