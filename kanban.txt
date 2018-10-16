@@ -10,9 +10,3 @@ user can select a task and then change its status (todo/doing/done)
 select employee name and display his/her tasks in a split screen format (todo/doing/done)
 
 in create user tab: display created users in a table so user can edit users
-======
-api on assign task to emp - status of the task will be todo - done
-display table with emp img & name
-on selecting an emp from table - we need a view button to see
-todo|doing|done
-edit button to edit the statuses of a task
