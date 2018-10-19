@@ -116,7 +116,7 @@ export default connect()(
 
       return (
         <div>
-          <div style={{ float: 'left' }}>
+          <div style={{ float: 'left', border: '1px solid' }}>
             {/* eslint-disable-next-line */}
             <label>TO DO</label>
             <ol>
@@ -140,7 +140,7 @@ export default connect()(
               ))}
             </ol>
           </div>
-          <div style={{ float: 'left' }}>
+          <div style={{ float: 'left', border: '1px solid' }}>
             {/* eslint-disable-next-line */}
             <label>DOING</label>
             <ol>
@@ -164,7 +164,7 @@ export default connect()(
               ))}
             </ol>
           </div>
-          <div style={{ float: 'left' }}>
+          <div style={{ float: 'left', border: '1px solid' }}>
             {/* eslint-disable-next-line */}
             <label>DONE</label>
             <ol>

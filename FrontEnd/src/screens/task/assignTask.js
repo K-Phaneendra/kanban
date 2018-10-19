@@ -6,7 +6,8 @@ import Primary from '../../components/Buttons/Primary';
 import { assignTask } from '../../actions/kanbanToolActions';
 import ContactsTabularView from '../contact/tabularView';
 import ResponsiveDialog from '../../components/Model/ResponsiveDialog';
-import EditTaskStatus from './editTaskStatus';
+// import EditTaskStatus from './editTaskStatus';
+import EditTaskStatusDnD from './editTaskStatusDnD';
 
 class AssignTask extends Component {
   constructor() {
@@ -125,7 +126,11 @@ class AssignTask extends Component {
                     onClose={() => this.setState({ openEdit: false })}
                     onSubmit={() => this.setState({ submitClicked: true })}
                   >
-                    <EditTaskStatus
+                    {/* <EditTaskStatus
+                      selectedRow={this.state.selectedRow}
+                      submitClicked={this.state.submitClicked}
+                    /> */}
+                    <EditTaskStatusDnD
                       selectedRow={this.state.selectedRow}
                       submitClicked={this.state.submitClicked}
                     />
