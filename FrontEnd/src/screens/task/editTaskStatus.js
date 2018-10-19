@@ -4,6 +4,18 @@ import { cloneDeep, pullAllWith, isEqual } from 'lodash';
 import { updateAssignedTasks } from '../../actions/kanbanToolActions';
 
 const objectId = '_id';
+const taskStyles = {
+  float: 'left',
+  border: '1px solid',
+  borderStyle: 'dotted',
+  padding: '15px',
+  margin: '5px'
+};
+
+const labelStyles = {
+  textAlign: 'center',
+  textDecoration: 'underline'
+};
 
 export default connect()(
   class EditTaskStatus extends Component {
@@ -116,9 +128,9 @@ export default connect()(
 
       return (
         <div>
-          <div style={{ float: 'left' }}>
+          <div style={taskStyles}>
             {/* eslint-disable-next-line */}
-            <label>TO DO</label>
+            <div style={labelStyles}>TO DO</div>
             <ol>
               {todoData.map(val => (
                 <li>
@@ -140,9 +152,9 @@ export default connect()(
               ))}
             </ol>
           </div>
-          <div style={{ float: 'left' }}>
+          <div style={taskStyles}>
             {/* eslint-disable-next-line */}
-            <label>DOING</label>
+            <div style={labelStyles}>DOING</div>
             <ol>
               {doingData.map(val => (
                 <li>
@@ -164,9 +176,9 @@ export default connect()(
               ))}
             </ol>
           </div>
-          <div style={{ float: 'left' }}>
+          <div style={taskStyles}>
             {/* eslint-disable-next-line */}
-            <label>DONE</label>
+            <div style={labelStyles}>DONE</div>
             <ol>
               {doneData.map(val => (
                 <li>
