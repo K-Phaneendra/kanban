@@ -11,12 +11,12 @@ import HelpIcon from '@material-ui/icons/Help';
 // import ShoppingBasket from '@material-ui/icons/ShoppingBasket';
 // import ThumbDown from '@material-ui/icons/ThumbDown';
 // import ThumbUp from '@material-ui/icons/ThumbUp';
-import Ballot from '@material-ui/icons/Ballot';
+// import Ballot from '@material-ui/icons/Ballot';
 import Typography from '@material-ui/core/Typography';
 import CreateContact from '../../screens/contact/createContact';
 import AssignTask from '../../screens/task/assignTask';
 import HelpDocs from '../../screens/HelpDocs/helpDocs';
-import DustbinApp from '../../screens/DragNDrop/Dustbin/DustbinApp';
+// import DustbinApp from '../../screens/DragNDrop/Dustbin/DustbinApp';
 
 function TabContainer(props) {
   return (
@@ -65,7 +65,7 @@ class ScrollableTabsButtonPrevent extends React.Component {
             <Tab icon={<HelpIcon />} />
             <Tab icon={<Contacts />} />
             <Tab icon={<List />} />
-            <Tab icon={<Ballot />} />
+            {/* <Tab icon={<Ballot />} /> */}
             {/* <Tab icon={<PersonPinIcon />} />
             <Tab icon={<HelpIcon />} />
             <Tab icon={<ShoppingBasket />} />
@@ -88,11 +88,11 @@ class ScrollableTabsButtonPrevent extends React.Component {
             <AssignTask users={users} tasks={tasks} />
           </TabContainer>
         )}
-        {value === 3 && (
+        {/* {value === 3 && (
           <TabContainer>
             <DustbinApp />
           </TabContainer>
-        )}
+        )} */}
         {value === 4 && <TabContainer>Item Five</TabContainer>}
         {value === 5 && <TabContainer>Item Six</TabContainer>}
         {value === 6 && <TabContainer>Item Seven</TabContainer>}
