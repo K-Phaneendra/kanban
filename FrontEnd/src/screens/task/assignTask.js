@@ -7,6 +7,7 @@ import { assignTask } from '../../actions/kanbanToolActions';
 import ContactsTabularView from '../contact/tabularView';
 import ResponsiveDialog from '../../components/Model/ResponsiveDialog';
 import EditTaskStatus from './editTaskStatus';
+import EditTaskStatusDnD from './editTaskStatusDnD';
 
 class AssignTask extends Component {
   constructor() {
@@ -14,7 +15,8 @@ class AssignTask extends Component {
     this.state = {
       disableSubmit: true,
       editForm: false,
-      openEdit: false
+      openEdit: false,
+      openEditDnD: false
     };
   }
 
@@ -104,19 +106,28 @@ class AssignTask extends Component {
         </div>
         <div>
           <div>
-            <ul
-              style={{
-                listStyleType: 'none',
-                margin: '0',
-                padding: '0',
-                width: '60px'
-              }}
-            >
-              {this.state.editForm ? (
-                <li>
+            {this.state.editForm ? (
+              <ul
+                style={{
+                  listStyleType: 'none',
+                  // margin: '0',
+                  padding: '0',
+                  width: '60px',
+                  float: 'left',
+                  margin: '0 5px',
+                  marginTop: '-25px'
+                }}
+              >
+                <li
+                  style={{
+                    position: 'fixed',
+                    float: 'left',
+                    marginLeft: '10px'
+                  }}
+                >
                   <i
                     className="far fa-edit"
-                    title="Edit Tasks"
+                    title="Edit Tasks with Buttons"
                     onClick={() => this.setState({ openEdit: true })}
                   />
                   <ResponsiveDialog
@@ -131,10 +142,34 @@ class AssignTask extends Component {
                     />
                   </ResponsiveDialog>
                 </li>
-              ) : (
-                ''
-              )}
-            </ul>
+                <li
+                  style={{
+                    position: 'fixed',
+                    float: 'right',
+                    marginLeft: '35px'
+                  }}
+                >
+                  <i
+                    className="far fa-eye"
+                    title="Edit Tasks with DnD"
+                    onClick={() => this.setState({ openEditDnD: true })}
+                  />
+                  <ResponsiveDialog
+                    heading="Tasks Overview"
+                    open={this.state.openEditDnD}
+                    onClose={() => this.setState({ openEditDnD: false })}
+                    onSubmit={() => this.setState({ submitClicked: true })}
+                  >
+                    <EditTaskStatusDnD
+                      selectedRow={this.state.selectedRow}
+                      submitClicked={this.state.submitClicked}
+                    />
+                  </ResponsiveDialog>
+                </li>
+              </ul>
+            ) : (
+              ''
+            )}
           </div>
           <div style={{ margin: '1em auto' }}>
             <ContactsTabularView
