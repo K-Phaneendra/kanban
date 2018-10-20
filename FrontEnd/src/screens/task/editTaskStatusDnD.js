@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
+import { find, cloneDeep } from 'lodash';
 import Todo from './dndFiles/todo';
 import Doing from './dndFiles/doing';
 import Done from './dndFiles/done';
@@ -72,6 +73,111 @@ class EditTaskStatusDnD extends Component {
     );
   };
 
+  intoDoing = id => {
+    const objectToAdd = find(this.state.todoData, { _id: id }) || find(this.state.doneData, { _id: id });
+    console.log('objectToAdd', objectToAdd, id);
+    if (objectToAdd) {
+      objectToAdd.status = 'DOING';
+      const doingDataClone = cloneDeep(this.state.doingData);
+      doingDataClone.push(objectToAdd);
+
+      // delete in todoData
+      const toDoDataClone = [];
+      this.state.todoData.map(tsk => {
+        if (tsk[objectId] === id) {
+          // do nothing
+        } else {
+          toDoDataClone.push(tsk);
+        }
+        return null;
+      });
+
+      // delete in doneData
+      const doneDataClone = [];
+      this.state.doneData.map(tsk => {
+        if (tsk[objectId] === id) {
+          // do nothing
+        } else {
+          doneDataClone.push(tsk);
+        }
+        return null;
+      });
+
+      console.log('doingDataClone', doingDataClone, toDoDataClone);
+      this.setState({ doingData: doingDataClone, todoData: toDoDataClone, doneData: doneDataClone });
+    }
+  };
+
+  intoTodo = id => {
+    const objectToAdd = find(this.state.doingData, { _id: id }) || find(this.state.doneData, { _id: id });
+    console.log('objectToAdd', objectToAdd, id);
+    if (objectToAdd) {
+      objectToAdd.status = 'TODO';
+      const toDoDataClone = cloneDeep(this.state.todoData);
+      toDoDataClone.push(objectToAdd);
+
+      // delete in doingData
+      const doingDataClone = [];
+      this.state.doingData.map(tsk => {
+        if (tsk[objectId] === id) {
+          // do nothing
+        } else {
+          doingDataClone.push(tsk);
+        }
+        return null;
+      });
+
+      // delete in doneData
+      const doneDataClone = [];
+      this.state.doneData.map(tsk => {
+        if (tsk[objectId] === id) {
+          // do nothing
+        } else {
+          doneDataClone.push(tsk);
+        }
+        return null;
+      });
+
+      console.log('doingDataClone', toDoDataClone, doingDataClone, doneDataClone);
+      this.setState({ doingData: doingDataClone, todoData: toDoDataClone, doneData: doneDataClone });
+    }
+  };
+
+  intoDone = id => {
+    const objectToAdd = find(this.state.doingData, { _id: id }) || find(this.state.todoData, { _id: id });
+    console.log('objectToAdd', objectToAdd, id);
+    if (objectToAdd) {
+      objectToAdd.status = 'DONE';
+      const doneDataClone = cloneDeep(this.state.todoData);
+      doneDataClone.push(objectToAdd);
+
+      // delete in doingData
+      const doingDataClone = [];
+      this.state.doingData.map(tsk => {
+        if (tsk[objectId] === id) {
+          // do nothing
+        } else {
+          doingDataClone.push(tsk);
+        }
+        return null;
+      });
+
+      // delete in todoData
+      const toDoDataClone = [];
+      this.state.todoData.map(tsk => {
+        if (tsk[objectId] === id) {
+          // do nothing
+        } else {
+          toDoDataClone.push(tsk);
+        }
+        return null;
+      });
+
+      console.log('doingDataClone', doingDataClone, toDoDataClone);
+      this.setState({ doingData: doingDataClone, todoData: toDoDataClone, doneData: doneDataClone });
+    }
+  };
+
   render() {
     const { todoData, doingData, doneData } = this.state;
     console.log('in edit', this.props);
@@ -85,6 +191,7 @@ class EditTaskStatusDnD extends Component {
               id={tsk[objectId]}
               text={tsk.task.name}
               moveCard={this.moveCard}
+              intoTodo={this.intoTodo}
             />
           ))}
         </div>
@@ -96,6 +203,7 @@ class EditTaskStatusDnD extends Component {
               id={tsk[objectId]}
               text={tsk.task.name}
               moveCard={this.moveCardDoing}
+              intoDoing={this.intoDoing}
             />
           ))}
         </div>
@@ -107,6 +215,7 @@ class EditTaskStatusDnD extends Component {
               id={tsk[objectId]}
               text={tsk.task.name}
               moveCard={this.moveCardDone}
+              intoDone={this.intoDone}
             />
           ))}
         </div>

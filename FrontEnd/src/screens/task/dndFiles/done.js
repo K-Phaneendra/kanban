@@ -36,6 +36,10 @@ const cardTarget = {
     const dragIndex = monitor.getItem().index;
     const hoverIndex = props.index;
 
+    // received task id is
+    const receivedTaskId = monitor.getItem().id;
+    props.intoDone(receivedTaskId);
+
     // Don't replace items with themselves
     if (dragIndex === hoverIndex) {
       return;
@@ -93,15 +97,19 @@ class Done extends React.Component {
       text,
       isDragging,
       connectDragSource,
-      connectDropTarget
+      connectDropTarget,
+      hovered
     } = this.props;
     const opacity = isDragging ? 0 : 1;
+    const backgroundColor = hovered ? 'lightgreen' : 'white';
 
     return (
       connectDragSource
       && connectDropTarget
       && connectDragSource(
-        connectDropTarget(<div style={{ ...style, opacity }}>{text}</div>)
+        connectDropTarget(
+          <div style={{ ...style, opacity, backgroundColor }}>{text}</div>
+        )
       )
     );
   }
@@ -110,6 +118,7 @@ class Done extends React.Component {
 export default flow(
   DragSource('card', cardSource, (connect, monitor) => ({
     connectDragSource: connect.dragSource(),
+    connectDragPreview: connect.dragPreview(),
     isDragging: monitor.isDragging()
   })),
   DropTarget('card', cardTarget, connect => ({
