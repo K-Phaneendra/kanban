@@ -27,6 +27,7 @@ class TextFieldComp extends React.Component {
         onBlur={props.onBlur}
         key={props.key}
         defaultValue={props.defaultValue}
+        disabled={props.disabled}
       />
     );
   }

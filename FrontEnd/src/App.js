@@ -37,6 +37,7 @@ class App extends Component {
             this.props.dispatch(handleSnackBar({ open: false, msg: '' }))
           }
         />
+        <div>{this.props.children}</div>
       </div>
     );
   }

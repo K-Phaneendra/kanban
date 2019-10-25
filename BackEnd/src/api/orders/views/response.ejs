@@ -1,0 +1,66 @@
+<html>
+  <head>
+    <title>Merchant Check Out Page</title>
+  </head>
+  <body>
+    <% var status = ''; var code = ''; var msg = ''; for (name in paramlist) {
+    if (name === 'STATUS') { status = paramlist[name]; } if (name ===
+    'RESPCODE') { code = paramlist[name]; } if (name === 'RESPMSG') { msg =
+    paramlist[name]; } %> <%}%>
+    <h2>code: <%= code %> Status: <%= status %> Msg: <%= msg %></h2>
+    <% if (restdata == 'true') { %>
+    <center><h4>Checksum validation succesfull</h4></center>
+    <% }else { %>
+    <center><h4>Checksum validation unsuccesfull</h4></center>
+    <% } %>
+    <form method="post" name="f1">
+      <table border="1">
+        <tbody>
+          <tr>
+            <th>Label</th>
+            <th>Value</th>
+          </tr>
+
+          <% for (name in paramlist) { %>
+
+          <tr>
+            <td><label><%= name %></label></td>
+            <td>
+              <input
+                id="<%= name %>"
+                tabindex="1"
+                maxlength="30"
+                size="30"
+                name="<%= name %>"
+                autocomplete="off"
+                value="<%= paramlist[name] %>"
+              />
+            </td>
+          </tr>
+          <!-- <input type="label" name='<%= name %>' value='<%= paramlist[name] %>'>
+				</br> -->
+          <%}%>
+        </tbody>
+      </table>
+      <script type="text/javascript">
+        //document.f1.submit();
+        var status = '';
+        var code = '';
+        var msg = '';
+        Object.keys(paramlist).map(name => {
+          if (name === 'STATUS') {
+            status = paramlist[name];
+          }
+          if (name === 'RESPCODE') {
+            code = paramlist[name];
+          }
+          if (name === 'RESPMSG') {
+            msg = paramlist[name];
+          }
+        });
+        document.getElementById('statusHeading').innerHTML =
+          'code:' + code + 'Status:' + status + 'Msg:' + msg;
+      </script>
+    </form>
+  </body>
+</html>

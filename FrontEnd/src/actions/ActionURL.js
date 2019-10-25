@@ -12,3 +12,8 @@ export const TaskUrl = {
   CREATE_TASK: `${API_BASE_URL}tasks/createtask`,
   FETCH_TASKS: `${API_BASE_URL}tasks/fetchtasks`
 };
+
+export const orderUrl = {
+  FETCH_ORDERS: `${API_BASE_URL}orders/fetchOrders`,
+  SUBMIT_ORDER: `${API_BASE_URL}orders/submitOrder`
+};

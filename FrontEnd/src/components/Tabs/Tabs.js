@@ -8,7 +8,7 @@ import Contacts from '@material-ui/icons/Contacts';
 import List from '@material-ui/icons/List';
 // import PersonPinIcon from '@material-ui/icons/PersonPin';
 import HelpIcon from '@material-ui/icons/Help';
-// import ShoppingBasket from '@material-ui/icons/ShoppingBasket';
+import ShoppingBasket from '@material-ui/icons/ShoppingBasket';
 // import ThumbDown from '@material-ui/icons/ThumbDown';
 // import ThumbUp from '@material-ui/icons/ThumbUp';
 // import Ballot from '@material-ui/icons/Ballot';
@@ -16,6 +16,7 @@ import Typography from '@material-ui/core/Typography';
 import CreateContact from '../../screens/contact/createContact';
 import AssignTask from '../../screens/task/assignTask';
 import HelpDocs from '../../screens/HelpDocs/helpDocs';
+import Checkout from '../../screens/Payment/Checkout';
 // import DustbinApp from '../../screens/DragNDrop/Dustbin/DustbinApp';
 
 function TabContainer(props) {
@@ -65,10 +66,10 @@ class ScrollableTabsButtonPrevent extends React.Component {
             <Tab icon={<HelpIcon />} />
             <Tab icon={<Contacts />} />
             <Tab icon={<List />} />
+            <Tab icon={<ShoppingBasket />} />
             {/* <Tab icon={<Ballot />} /> */}
             {/* <Tab icon={<PersonPinIcon />} />
             <Tab icon={<HelpIcon />} />
-            <Tab icon={<ShoppingBasket />} />
             <Tab icon={<ThumbDown />} />
             <Tab icon={<ThumbUp />} /> */}
           </Tabs>
@@ -93,7 +94,11 @@ class ScrollableTabsButtonPrevent extends React.Component {
             <DustbinApp />
           </TabContainer>
         )} */}
-        {value === 4 && <TabContainer>Item Five</TabContainer>}
+        {value === 3 && (
+          <TabContainer>
+            <Checkout />
+          </TabContainer>
+        )}
         {value === 5 && <TabContainer>Item Six</TabContainer>}
         {value === 6 && <TabContainer>Item Seven</TabContainer>}
       </div>
