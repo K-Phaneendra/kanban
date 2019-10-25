@@ -72,7 +72,7 @@
     "jsonwebtoken": "^7.1.9",
     "lodash": "^4.13.1",
     "md5": "^2.2.1",
-    "mongoose": "^4.4.19",
+    "mongoose": "^5.7.7",
     "mongoose-create-unique": "^0.4.1",
     "mongoose-keywords": "^0.3.1",
     "morgan": "^1.7.0",
